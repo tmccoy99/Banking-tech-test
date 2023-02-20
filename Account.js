@@ -19,6 +19,10 @@ class Account {
     });
   }
 
+  withdraw() {
+    this.transactionHistory.push({});
+  }
+
   #checkTransactionAmountValid(amount) {
     const hasMoreThanTwoDecimals = (amountString) => {
       return /^\d+\.\d{3,}$/.test(amountString);

@@ -10,7 +10,7 @@ describe('Account class testing -', () => {
     expect(account.getTransactionHistory()).toStrictEqual([]);
   });
 
-  describe('Deposit testing -', () => {
+  describe('Deposit testing - ', () => {
     let account;
     beforeEach(() => {
       account = new Account();
@@ -58,6 +58,22 @@ describe('Account class testing -', () => {
       expect(secondTransaction.date).toBeInstanceOf(Date);
 
       expect(firstTransaction.date < secondTransaction.date);
+    });
+  });
+
+  describe('Withdrawal testing - ', () => {
+    let account;
+    beforeEach(() => {
+      account = new Account();
+    });
+    test('if the argument of withdraw is valid and greater than or equal to the \
+    balance of the account, an object is added to transaction history', () => {
+      account.deposit(100);
+      account.withdraw(50);
+      account.withdraw(50.0);
+      const transactionHistory = account.getTransactionHistory();
+      expect(transactionHistory.length).toBe(3);
+      expect(transactionHistory.every((el) => el instanceof Object)).toBe(true);
     });
   });
 });
