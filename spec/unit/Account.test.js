@@ -26,5 +26,16 @@ describe('Account class testing -', () => {
         account.getTransactionHistory().every((el) => el instanceof Object)
       ).toBe(true);
     });
+
+    test('deposit calls with non numerical or invalid numerical arguments throw error', () => {
+      invalidArguments = [-1, 10.001, '50', [100]];
+      for (argument of invalidArguments) {
+        expect(() => account.deposit(argument)).toThrow(
+          new Error(
+            'You have attempted to deposit an invalid transaction amount'
+          )
+        );
+      }
+    });
   });
 });
