@@ -9,7 +9,7 @@ class Account {
   }
 
   deposit(amount) {
-    this.#checkTransactionAmountValid(amount);
+    this.#checkTransactionAmountValid(amount, 'deposit');
     this.balance += amount;
     this.transactionHistory.push({
       type: 'deposit',
@@ -19,11 +19,12 @@ class Account {
     });
   }
 
-  withdraw() {
+  withdraw(amount) {
+    this.#checkTransactionAmountValid(amount, 'withdraw');
     this.transactionHistory.push({});
   }
 
-  #checkTransactionAmountValid(amount) {
+  #checkTransactionAmountValid(amount, action) {
     const hasMoreThanTwoDecimals = (amountString) => {
       return /^\d+\.\d{3,}$/.test(amountString);
     };
@@ -33,7 +34,7 @@ class Account {
       amount < 0
     ) {
       throw new Error(
-        'You have attempted to deposit an invalid transaction amount'
+        `You have attempted to ${action} an invalid transaction amount`
       );
     }
   }

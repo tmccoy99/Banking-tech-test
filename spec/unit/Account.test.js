@@ -28,7 +28,7 @@ describe('Account class testing -', () => {
     });
 
     test('deposit calls with non numerical or invalid numerical arguments throw error', () => {
-      invalidArguments = [-1, 10.001, '50', [100]];
+      const invalidArguments = [-1, 10.001, '50', [100]];
       for (argument of invalidArguments) {
         expect(() => account.deposit(argument)).toThrow(
           new Error(
@@ -74,6 +74,18 @@ describe('Account class testing -', () => {
       const transactionHistory = account.getTransactionHistory();
       expect(transactionHistory.length).toBe(3);
       expect(transactionHistory.every((el) => el instanceof Object)).toBe(true);
+    });
+
+    test('withdraw calls with non numerical or invalid numerical arguments throw error', () => {
+      account.deposit(1000);
+      const invalidArguments = [-1, 10.001, '50', [100]];
+      for (argument of invalidArguments) {
+        expect(() => account.withdraw(argument)).toThrow(
+          new Error(
+            'You have attempted to withdraw an invalid transaction amount'
+          )
+        );
+      }
     });
   });
 });
