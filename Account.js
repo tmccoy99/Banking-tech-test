@@ -21,6 +21,7 @@ class Account {
 
   withdraw(amount) {
     this.#checkTransactionAmountValid(amount, 'withdraw');
+    this.#checkWithdrawalAgainstBalance(amount);
     this.transactionHistory.push({});
   }
 
@@ -35,6 +36,16 @@ class Account {
     ) {
       throw new Error(
         `You have attempted to ${action} an invalid transaction amount`
+      );
+    }
+  }
+
+  #checkWithdrawalAgainstBalance(amount) {
+    if (amount > this.balance) {
+      throw new Error(
+        `The amount you have attempted to withdraw exceeds your balance by £${(
+          amount - this.balance
+        ).toFixed(2)}`
       );
     }
   }

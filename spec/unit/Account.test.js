@@ -68,9 +68,9 @@ describe('Account class testing -', () => {
     });
     test('if the argument of withdraw is valid and greater than or equal to the \
     balance of the account, an object is added to transaction history', () => {
-      account.deposit(100);
+      account.deposit(100.51);
       account.withdraw(50);
-      account.withdraw(50.0);
+      account.withdraw(50.51);
       const transactionHistory = account.getTransactionHistory();
       expect(transactionHistory.length).toBe(3);
       expect(transactionHistory.every((el) => el instanceof Object)).toBe(true);
@@ -86,6 +86,21 @@ describe('Account class testing -', () => {
           )
         );
       }
+    });
+
+    test('calling withdraw with an argument that exceeds the current balance will throw an error \
+    that specifies the amount by which the balance is exceeded', () => {
+      expect(() => account.withdraw(100)).toThrow(
+        new Error(
+          'The amount you have attempted to withdraw exceeds your balance by £100.00'
+        )
+      );
+      account.deposit(1.33);
+      expect(() => account.withdraw(1.34)).toThrow(
+        new Error(
+          'The amount you have attempted to withdraw exceeds your balance by £0.01'
+        )
+      );
     });
   });
 });
