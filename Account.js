@@ -1,6 +1,7 @@
 class Account {
   constructor() {
     this.transactionHistory = [];
+    this.balance = 0;
   }
 
   getTransactionHistory() {
@@ -9,7 +10,13 @@ class Account {
 
   deposit(amount) {
     this.#checkTransactionAmountValid(amount);
-    this.transactionHistory.push({});
+    this.balance += amount;
+    this.transactionHistory.push({
+      type: 'deposit',
+      amount: amount,
+      balance: this.balance,
+      date: new Date(),
+    });
   }
 
   #checkTransactionAmountValid(amount) {

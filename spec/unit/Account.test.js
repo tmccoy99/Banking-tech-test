@@ -37,5 +37,27 @@ describe('Account class testing -', () => {
         );
       }
     });
+
+    test('objects added to transaction history by deposit have correct type, amount, balance and date properties', () => {
+      account.deposit(10);
+      const firstTransaction = account.getTransactionHistory()[0];
+      expect(firstTransaction).toMatchObject({
+        type: 'deposit',
+        amount: 10,
+        balance: 10,
+      });
+      expect(firstTransaction.date).toBeInstanceOf(Date);
+
+      account.deposit(50);
+      const secondTransaction = account.getTransactionHistory()[1];
+      expect(secondTransaction).toMatchObject({
+        type: 'deposit',
+        amount: 50,
+        balance: 60,
+      });
+      expect(secondTransaction.date).toBeInstanceOf(Date);
+
+      expect(firstTransaction.date < secondTransaction.date);
+    });
   });
 });
