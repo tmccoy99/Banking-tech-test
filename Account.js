@@ -1,6 +1,14 @@
 class Account {
+  constructor() {
+    this.transactionHistory = [];
+  }
+
   getTransactionHistory() {
-    return [];
+    return this.transactionHistory;
+  }
+
+  deposit() {
+    this.transactionHistory.push({});
   }
 }
 
