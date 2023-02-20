@@ -22,7 +22,13 @@ class Account {
   withdraw(amount) {
     this.#checkTransactionAmountValid(amount, 'withdraw');
     this.#checkWithdrawalAgainstBalance(amount);
-    this.transactionHistory.push({});
+    this.balance -= amount;
+    this.transactionHistory.push({
+      type: 'withdrawal',
+      amount: amount,
+      balance: this.balance,
+      date: new Date(),
+    });
   }
 
   #checkTransactionAmountValid(amount, action) {

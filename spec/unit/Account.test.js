@@ -102,5 +102,28 @@ describe('Account class testing -', () => {
         )
       );
     });
+
+    test('objects added to transaction history by withdraw have correct type, amount, balance and date properties', () => {
+      account.deposit(60);
+      account.withdraw(10);
+      const firstWithdrawal = account.getTransactionHistory()[1];
+      expect(firstWithdrawal).toMatchObject({
+        type: 'withdrawal',
+        amount: 10,
+        balance: 50,
+      });
+      expect(firstWithdrawal.date).toBeInstanceOf(Date);
+
+      account.withdraw(50);
+      const secondWithdrawal = account.getTransactionHistory()[2];
+      expect(secondWithdrawal).toMatchObject({
+        type: 'withdrawal',
+        amount: 50,
+        balance: 0,
+      });
+      expect(secondWithdrawal.date).toBeInstanceOf(Date);
+
+      expect(firstWithdrawal.date < secondWithdrawal.date);
+    });
   });
 });
