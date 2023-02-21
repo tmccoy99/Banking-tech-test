@@ -8,18 +8,18 @@ class Account {
     return this.transactionHistory;
   }
 
-  deposit(amount) {
+  deposit(amount, date = new Date()) {
     this.#checkTransactionAmountValid(amount, 'deposit');
     this.balance += amount;
     this.transactionHistory.push({
       type: 'deposit',
       amount: amount,
       balance: this.balance,
-      date: new Date(),
+      date: date,
     });
   }
 
-  withdraw(amount) {
+  withdraw(amount, date = new Date()) {
     this.#checkTransactionAmountValid(amount, 'withdraw');
     this.#checkWithdrawalAgainstBalance(amount);
     this.balance -= amount;
@@ -27,7 +27,7 @@ class Account {
       type: 'withdrawal',
       amount: amount,
       balance: this.balance,
-      date: new Date(),
+      date: date,
     });
   }
 
