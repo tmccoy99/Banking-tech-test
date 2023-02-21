@@ -29,10 +29,13 @@ describe('StatementPrinter class testing -', () => {
   describe('Print method testing - ', () => {
     const ioMock = { log: jest.fn() };
     let statementPrinter;
+    let mockAccountInstance;
     beforeEach(() => {
       statementPrinter = new StatementPrinter(new Account(), ioMock);
+      mockAccountInstance = Account.mock.instances[0];
     });
     test('calling print when saved Account has no transactions logs only statement header string', () => {
+      mockAccountInstance.getTransactionHistory.mockReturnValueOnce({});
       statementPrinter.print();
       expect(ioMock.log).toHaveBeenCalledWith(
         'date || credit || debit || balance'
