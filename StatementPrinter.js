@@ -13,9 +13,9 @@ class StatementPrinter {
 
   print() {
     this.#printHeader();
-    const deposits = this.account.getTransactionHistory();
-    for (const deposit of deposits.reverse()) {
-      this.#printFormattedDeposit(deposit);
+    const transactions = this.account.getTransactionHistory();
+    for (const transaction of transactions.reverse()) {
+      this.#printFormattedTransaction(transaction);
     }
   }
 
@@ -23,17 +23,21 @@ class StatementPrinter {
     this.io.log('date || credit || debit || balance');
   }
 
-  #printFormattedDeposit(deposit) {
+  #printFormattedTransaction(transaction) {
+    const dateString = this.#generateDateString(transaction.date);
+    const creditString =
+      transaction.type === 'deposit' ? transaction.amount.toFixed(2) : '';
+    const debitString =
+      transaction.type === 'withdrawal' ? transaction.amount.toFixed(2) : '';
+    const balanceString = transaction.balance.toFixed(2);
     this.io.log(
-      `${this.#generateDateString(deposit.date)} || ${deposit.amount.toFixed(
-        2
-      )} || || ${deposit.balance.toFixed(2)}`
+      `${dateString} || ${creditString} || ${debitString} || ${balanceString}`
     );
   }
 
   #generateDateString(date) {
-    let dayString = date.getDate().toString();
-    let monthString = (date.getMonth() + 1).toString();
+    const dayString = date.getDate().toString();
+    const monthString = (date.getMonth() + 1).toString();
     const addLeadingZeroIfNecessary = (string) => {
       return string.length === 1 ? '0' + string : string;
     };
