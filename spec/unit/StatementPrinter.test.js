@@ -25,4 +25,19 @@ describe('StatementPrinter class testing -', () => {
       new StatementPrinter([new Account()], new Account());
     }).toThrow(constructorError);
   });
+
+  describe('Print method testing - ', () => {
+    const ioMock = { log: jest.fn() };
+    let statementPrinter;
+    beforeEach(() => {
+      statementPrinter = new StatementPrinter(new Account(), ioMock);
+    });
+    test('calling print when saved Account has no transactions logs only statement header string', () => {
+      statementPrinter.print();
+      expect(ioMock.log).toHaveBeenCalledWith(
+        'date || credit || debit || balance'
+      );
+      expect(ioMock.log.mock.calls).toHaveLength(1);
+    });
+  });
 });
