@@ -13,11 +13,11 @@ The optimal means by which to fulfill the second requirement was less obvious. G
 
 ## Testing
 This software was developed through rigorous application of TDD and by committing after each passing test. The testing technology used was Jest and running `npm install` followed by `jest` in the terminal - while in the home directory of the repository - will run all tests.
-<img width="296" alt="Screenshot 2023-02-21 at 17 11 55" src="https://user-images.githubusercontent.com/67124105/220414673-4ae8d350-2c90-4f7d-b9ac-956527c2a744.png">
 
 ## Using this software
 This software was designed to be run in `Node` or another REPL. As in the image below, simply import and instantiate the `Account` and `StatementPrinter` classes and use the `deposit`, `withdraw` and `print` methods as you wish.
-<img width="458" alt="Screenshot 2023-02-21 at 17 26 47" src="https://user-images.githubusercontent.com/67124105/220416974-940e85fc-13db-4282-a7f7-f92e39570755.png">
+<img width="423" alt="Screenshot 2023-02-22 at 10 24 12" src="https://user-images.githubusercontent.com/67124105/220592906-68547c64-0943-4f17-a049-bd464717c851.png">
+
 
 ## Extensions to the software
 There are a multitude of extensions that would be worthwile additions to this software. Those that I would consider to be natural next steps would be to add alignment to the printed statements to increase readability, and to allow `Account` to store personal information which could then be printed on statements.
