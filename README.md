@@ -16,6 +16,7 @@ This software was developed through rigorous application of TDD and by committin
 
 ## Using this software
 This software was designed to be run in `Node` or another REPL. As in the image below, simply import and instantiate the `Account` and `StatementPrinter` classes and use the `deposit`, `withdraw` and `print` methods as you wish.
+
 <img width="423" alt="Screenshot 2023-02-22 at 10 24 12" src="https://user-images.githubusercontent.com/67124105/220592906-68547c64-0943-4f17-a049-bd464717c851.png">
 
 
